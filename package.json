@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "draw": "canvas-sketch sketch.js --open"
+    "draw": "canvas-sketch sketch.js --open",
+    "drawCourseFile": "canvas-sketch sketch-01.js --open",
+    "saveFile": "canvas-sketch sketch.js --output=output/01"
   },
   "repository": {
     "type": "git",
