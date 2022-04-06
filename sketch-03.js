@@ -6,6 +6,14 @@ const settings = {
 };
 
 
+// Animate manually!
+// const animate = () => {
+//   console.log("Domestika!");
+//   requestAnimationFrame(animate);
+// }
+
+// animate();
+
 const sketch = ({ context, width, height }) => {
   console.log(context);
   console.log({});
@@ -25,6 +33,7 @@ const sketch = ({ context, width, height }) => {
     agents.forEach(agent => {
       agent.update();
       agent.draw(context);
+      agent.bounce(width, height);
     })
   };
 };
@@ -59,5 +68,14 @@ class Agent {
     theContext.fill();
     theContext.stroke();
     theContext.restore();
+  }
+
+  bounce(width, height) {
+    if (this.pos.x <= 0 || this.pos.x >= width) {
+      this.vel.x *= -1;
+    }
+    if (this.pos.y <= 0 || this.pos.y >= height) {
+      this.vel.y *= -1;
+    }
   }
 }
