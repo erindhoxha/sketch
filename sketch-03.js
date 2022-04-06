@@ -49,7 +49,8 @@ const sketch = ({ context, width, height }) => {
     agents.forEach(agent => {
       agent.update();
       agent.draw(context);
-      agent.bounce(width, height);
+      // agent.bounce(width, height);
+      agent.wrap(width, height);
     })
   };
 };
@@ -100,4 +101,11 @@ class Agent {
       this.vel.y *= -1;
     }
   }
+
+  wrap(width, height){
+    if (this.pos.x <= 0 || this.pos.x >= width) this.pos.x = width -this.pos.x;
+    if (this.pos.y <= 0 || this.pos.y >= height) this.pos.y = height - this.pos.y;
+  }
 }
+
+ 
