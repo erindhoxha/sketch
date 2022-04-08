@@ -2,7 +2,13 @@ const canvasSketch = require('canvas-sketch');
 const random = require('canvas-sketch-util/random');
 
 const settings = {
-  dimensions: [ 1900, 1500 ]
+  dimensions: [ 1900, 1500 ],
+  animate: true,
+  // Set loop duration to 3
+  duration: 10,
+  // Use a small size for better GIF file size
+  // Optionally specify a frame rate, defaults to 30
+  fps: 60
 };
 
 let manager, image;
@@ -14,7 +20,7 @@ let fontFamily = 'serif';
 const typeCanvas = document.createElement('canvas');
 const typeContext = typeCanvas.getContext('2d');
 
-const sketch = ({ context, width, height }) => {
+const sketch = ({ context, width, height, time = 20}) => {
   const cell = 20;
   const cols = Math.floor(width  / cell);
   const rows = Math.floor(height / cell);
@@ -23,7 +29,7 @@ const sketch = ({ context, width, height }) => {
   typeCanvas.width  = cols;
   typeCanvas.height = rows;
 
-  return ({ context, width, height }) => {
+  return ({ context, width, height, time = 20 }) => {
     typeContext.fillStyle = 'black';
     typeContext.fillRect(0, 0, cols, rows);
 
@@ -44,8 +50,11 @@ const sketch = ({ context, width, height }) => {
       const col = i % cols;
       const row = Math.floor(i / cols);
 
-      const x = col * cell + random.range(-cell, cell) * 0.5;
-      const y = row * cell + random.range(-cell, cell) * 0.5;
+      // const x = col * cell + random.range(-cell, cell) * 0.1;
+      // const y = row * cell + random.range(-cell, cell) * 0.1;
+
+      const x = col * cell + 0;
+      const y = row * cell + 0;
 
       const r = typeData[i * 4 + 0];
       const g = typeData[i * 4 + 1];
@@ -55,7 +64,7 @@ const sketch = ({ context, width, height }) => {
       const glyph = getGlyph(r);
 
       context.font = `${cell * 2}px ${fontFamily}`;
-      if (Math.random() < 0.1) context.font = `${cell * 6}px ${fontFamily}`;
+      if (Math.random(0.1, 0.12) < 0.2) context.font = `${cell * 0.00001}px ${fontFamily}`;
 
       context.fillStyle = 'white';
 
@@ -76,13 +85,13 @@ const sketch = ({ context, width, height }) => {
 
 const getGlyph = (v) => {
   if (v < 50) return '';
-  // if (v < 100) return '-';
-  // if (v < 150) return '—';
-  // if (v < 200) return '=';
+  if (v < 100) return 'v';
+  if (v < 150) return '^';
+  if (v < 200) return '=';
 
   const glyphs = '.'.split('');
 
-  return random.pick(glyphs);
+  return ".";
 };
 
 
