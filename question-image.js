@@ -2,7 +2,7 @@ const canvasSketch = require('canvas-sketch');
 const random = require('canvas-sketch-util/random');
 
 const settings = {
-  dimensions: [ 1300, 1080 ]
+  dimensions: [ 1900, 1500 ]
 };
 
 let manager, image;
